@@ -12,9 +12,7 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     $(this.el).html(this.template());
 
     _.each(this.collection, function (someTodo) {
-      // var todoHTML = HandlebarsTemplates['todos/show'](someTodo);
       var todoHTML = new SpaApp.Views.TodosShow({model: someTodo});
-      // this.$el.append(todoHTML); 
       this.$el.append(todoHTML.render().el);
     }, this);
 
@@ -27,19 +25,20 @@ SpaApp.Views.TodosIndex = Backbone.View.extend({
     var newTodo = {
       title: $("#todo_title").val(),
       completed: false
-    };
+      };
 
-     $.ajax({type: "Post",
-      url: '/todos.json', 
-      context: this,
-      data: {todo: newTodo}
-      })
+     $.ajax({type: "post",
+            url: '/todos', 
+            context: this,
+            data: {todo: newTodo}
+            })
       .done(function(data) {
         var todoHTML = new SpaApp.Views.TodosShow({model: data});
         this.$el.append(todoHTML.render().el);
+        $("#todo_title").val(" ");
       });
     return this;
-  }
+    }
 
 
 });
