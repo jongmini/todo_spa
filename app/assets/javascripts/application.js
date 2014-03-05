@@ -17,7 +17,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
-//= require spa_app
 //= require_tree ../templates
+//= require spa_app
 //= require_tree ./views
 //= require_tree .
